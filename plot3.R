@@ -8,9 +8,13 @@ file <- file.path(".","household_power_consumption.txt", fsep = .Platform$file.s
 library(sqldf)
 
 DATA <- read.csv.sql(file, sql = "select * from file where Date in ('1/2/2007','2/2/2007')", header=TRUE, sep = ";")
+
 timechar <- paste0(DATA[,1], " ", DATA[,2])
 datetime <- strptime(timechar, "%e/%m/%Y %H:%M:%S")
 DATA <- cbind(DATA,datetime)
+
+# Changing the locale to use the english weekdays
+Sys.setlocale("LC_ALL","English")
 
 png(filename = "plot3.png", width = 480, height = 480, units = "px")
 

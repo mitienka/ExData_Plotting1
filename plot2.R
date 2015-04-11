@@ -12,6 +12,9 @@ timechar <- paste0(DATA[,1], " ", DATA[,2])
 datetime <- strptime(timechar, "%e/%m/%Y %H:%M:%S")
 DATA <- cbind(DATA,datetime)
 
+# Changing the locale to use the english weekdays
+Sys.setlocale("LC_ALL","English")
+
 png(filename = "plot2.png", width = 480, height = 480, units = "px")
 
 with(DATA, plot(datetime,Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)"))
